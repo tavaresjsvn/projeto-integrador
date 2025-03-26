@@ -1,0 +1,1 @@
+-- Coloque neste arquivo todo o código de criação do banco de dados
