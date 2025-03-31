@@ -10,6 +10,7 @@
 | Aluno 1 |
 | Aluno 2 |
 | Aluno 3 |
+| Saulo Torres |
 
 ## Introdução
 
