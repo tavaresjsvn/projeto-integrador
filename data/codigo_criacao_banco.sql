@@ -82,4 +82,22 @@ CREATE TABLE Avaliacao (
     FOREIGN KEY (ID_Salao) REFERENCES Salao(ID_Salao) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE Cronograma_Capilar (
+    ID_Cronograma INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Usuario INT NOT NULL,
+    ID_Perfil_Capilar INT NOT NULL,
+    Data DATE NOT NULL,
+    Meu_Cuidado TEXT NULL,
+    Produto_Sugerido VARCHAR(255) NULL,
+    Recomendacoes TEXT NULL,
+    FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (ID_Perfil_Capilar) REFERENCES Perfil_Capilar(ID_Perfil_Capilar) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
+CREATE TABLE Plano (
+    ID_Plano INT AUTO_INCREMENT PRIMARY KEY,
+    Tipo VARCHAR(50) NOT NULL,
+    Duracao INT NULL,
+    Beneficios TEXT NULL,
+    Valor DECIMAL(10, 2) NOT NULL
+);
