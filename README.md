@@ -1,4 +1,4 @@
-# Atividade em grupo - Projeto Integrador II
+# Atividade em Grupo - Projeto Integrador II
 
 ### Faculdade Alpha
 ### Professor: Rafael Marinho dos Anjos
@@ -7,10 +7,10 @@
 
 | Alunos |
 |--------|
-| Eduarda Almeida |
-| Josevan Tavares |
-| Ívia Xavier |
-| Saulo Torres |
+| Ívia Xavier Bezerra |
+| Josevan Tavares Pereira Ramos |
+| Maria Eduarda Silva de Almeida |
+| Saulo Torres de Oliveira Assis |
 
 ## Introdução
 
