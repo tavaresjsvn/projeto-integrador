@@ -1,1 +1,27 @@
--- Coloque neste arquivo todo o código de criação do banco de dados
+CREATE DATABASE HairMatch;
+
+USE HairMatch;
+
+CREATE TABLE Usuario (
+    ID_Usuario INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL UNIQUE,
+    CPF VARCHAR(14) NOT NULL UNIQUE,
+    Telefone VARCHAR(20) NULL,
+    Idade INT NULL,
+    Endereco TEXT NULL,
+    Senha VARCHAR(255) NOT NULL,
+    ID_Plano INT NOT NULL,
+    FOREIGN KEY (ID_Plano) REFERENCES Plano(ID_Plano) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+CREATE TABLE Perfil_Capilar (
+    ID_Perfil_Capilar INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Usuario INT NOT NULL UNIQUE,
+    Tipo_de_Cabelo VARCHAR(100) NULL,
+    Descricao_da_Curvatura VARCHAR(255) NULL,
+    Curvatura VARCHAR(50) NULL,
+    Estado_do_Cabelo VARCHAR(255) NULL,
+    Objetivo VARCHAR(255) NULL,
+    FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario) ON DELETE CASCADE ON UPDATE CASCADE
+);
