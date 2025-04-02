@@ -1,103 +1,108 @@
-CREATE DATABASE HairMatch;
+CREATE DATABASE hairmatch;
 
-USE HairMatch;
+USE hairmatch;
 
-CREATE TABLE Usuario (
-    ID_Usuario INT AUTO_INCREMENT PRIMARY KEY,
-    Nome VARCHAR(255) NOT NULL,
-    Email VARCHAR(255) NOT NULL UNIQUE,
-    CPF VARCHAR(14) NOT NULL UNIQUE,
-    Telefone VARCHAR(20) NULL,
-    Idade INT NULL,
-    Endereco TEXT NULL,
-    Senha VARCHAR(255) NOT NULL,
-    ID_Plano INT NOT NULL,
-    FOREIGN KEY (ID_Plano) REFERENCES Plano(ID_Plano) ON DELETE RESTRICT ON UPDATE CASCADE
+CREATE TABLE usuario (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    telefone VARCHAR(20) NULL,
+    idade INT NULL,
+    endereco TEXT NULL,
+    senha VARCHAR(255) NOT NULL,
+    id_plano INT NOT NULL,
+    FOREIGN KEY (id_plano) REFERENCES plano(id_plano) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
-CREATE TABLE Perfil_Capilar (
-    ID_Perfil_Capilar INT AUTO_INCREMENT PRIMARY KEY,
-    ID_Usuario INT NOT NULL UNIQUE,
-    Tipo_de_Cabelo VARCHAR(100) NULL,
-    Descricao_da_Curvatura VARCHAR(255) NULL,
-    Curvatura VARCHAR(50) NULL,
-    Estado_do_Cabelo VARCHAR(255) NULL,
-    Objetivo VARCHAR(255) NULL,
-    FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE perfil_capilar (
+    id_perfil_capilar INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL UNIQUE,
+    tipo_de_cabelo VARCHAR(100) NULL,
+    descricao_da_curvatura VARCHAR(255) NULL,
+    curvatura VARCHAR(50) NULL,
+    estado_do_cabelo VARCHAR(255) NULL,
+    objetivo VARCHAR(255) NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE Salao (
-    ID_Salao INT AUTO_INCREMENT PRIMARY KEY,
-    Nome VARCHAR(255) NOT NULL,
-    Endereco VARCHAR(255) NOT NULL,
-    Telefone VARCHAR(20) NULL,
-    Especialidades TEXT NULL,
-    Nota DECIMAL(3, 2) DEFAULT 0.00
+CREATE TABLE salao (
+    id_salao INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    endereco VARCHAR(255) NOT NULL,
+    eelefone VARCHAR(20) NULL,
+    especialidades TEXT NULL,
+    nota DECIMAL(3, 2) DEFAULT 0.00
 );
 
-CREATE TABLE Profissional (
-    ID_Profissional INT AUTO_INCREMENT PRIMARY KEY,
-    ID_Salao INT NOT NULL,
-    Nome VARCHAR(255) NOT NULL,
-    Especialidade VARCHAR(255) NULL,
-    Telefone VARCHAR(20) NULL,
-    FOREIGN KEY (ID_Salao) REFERENCES Salao(ID_Salao) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE profissional (
+    id_profissional INT AUTO_INCREMENT PRIMARY KEY,
+    id_salao INT NOT NULL,
+    nome VARCHAR(255) NOT NULL,
+    especialidade VARCHAR(255) NULL,
+    telefone VARCHAR(20) NULL,
+    FOREIGN KEY (id_salao) REFERENCES salao(id_salao) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE Servico (
-    ID_Servico INT AUTO_INCREMENT PRIMARY KEY,
-    ID_Salao INT NOT NULL,
-    ID_Profissional INT NULL,
-    Nome VARCHAR(255) NOT NULL,
-    Descricao TEXT NULL,
-    Preco DECIMAL(10, 2) NOT NULL,
-    Tipo_Servico VARCHAR(100) NULL,
-    FOREIGN KEY (ID_Salao) REFERENCES Salao(ID_Salao) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (ID_Profissional) REFERENCES Profissional(ID_Profissional) ON DELETE SET NULL ON UPDATE CASCADE
+CREATE TABLE servico (
+    id_servico INT AUTO_INCREMENT PRIMARY KEY,
+    id_salao INT NOT NULL,
+    id_profissional INT NULL,
+    nome VARCHAR(255) NOT NULL,
+    descricao TEXT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
+    tipo_servico VARCHAR(100) NULL,
+    FOREIGN KEY (id_salao) REFERENCES salao(id_salao) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_profissional) REFERENCES profissional(id_profissional) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
-CREATE TABLE Agendamento (
-    ID_Agendamento INT AUTO_INCREMENT PRIMARY KEY,
-    ID_Usuario INT NOT NULL,
-    ID_Salao INT NOT NULL,
-    ID_Profissional INT NULL,
-    ID_Servico INT NOT NULL,
-    Data DATE NOT NULL,
-    Hora TIME NOT NULL,
-    Status VARCHAR(50) NOT NULL DEFAULT 'Agendado',
-    FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (ID_Salao) REFERENCES Salao(ID_Salao) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (ID_Profissional) REFERENCES Profissional(ID_Profissional) ON DELETE SET NULL ON UPDATE CASCADE,
-    FOREIGN KEY (ID_Servico) REFERENCES Servico(ID_Servico) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE agendamento (
+    id_agendamento INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_salao INT NOT NULL,
+    id_profissional INT NULL,
+    id_servico INT NOT NULL,
+    data_agendamento DATE NOT NULL,
+    hora_agendamento TIME NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'Agendado',
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_salao) REFERENCES salao(id_salao) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_profissional) REFERENCES profissional(id_profissional) ON DELETE SET NULL ON UPDATE CASCADE,
+    FOREIGN KEY (id_servico) REFERENCES servico(id_servico) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE Avaliacao (
-    ID_Avaliacao INT AUTO_INCREMENT PRIMARY KEY,
-    ID_Usuario INT NOT NULL,
-    ID_Salao INT NOT NULL,
-    Nota INT NOT NULL CHECK (Nota >= 1 AND Nota <= 5),
-    Comentario TEXT NULL,
-    Data_Avaliacao DATE NOT NULL,
-    FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (ID_Salao) REFERENCES Salao(ID_Salao) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE avaliacao (
+    id_avaliacao INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_salao INT NOT NULL,
+    nota INT NOT NULL CHECK (nota >= 1 AND nota <= 5),
+    comentario TEXT NULL,
+    data_avaliacao DATE NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_salao) REFERENCES salao(id_salao) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE Cronograma_Capilar (
-    ID_Cronograma INT AUTO_INCREMENT PRIMARY KEY,
-    ID_Usuario INT NOT NULL,
-    ID_Perfil_Capilar INT NOT NULL,
-    Data DATE NOT NULL,
-    Meu_Cuidado TEXT NULL,
-    Produto_Sugerido VARCHAR(255) NULL,
-    Recomendacoes TEXT NULL,
-    FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (ID_Perfil_Capilar) REFERENCES Perfil_Capilar(ID_Perfil_Capilar) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE cronograma_capilar (
+    id_cronograma INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_perfil_capilar INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_perfil_capilar) REFERENCES perfil_capilar(id_perfil_capilar) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE Plano (
-    ID_Plano INT AUTO_INCREMENT PRIMARY KEY,
-    Tipo VARCHAR(50) NOT NULL,
-    Duracao INT NULL,
-    Beneficios TEXT NULL,
-    Valor DECIMAL(10, 2) NOT NULL
+CREATE TABLE etapa_cronograma (
+    id_etapa_cronograma INT AUTO_INCREMENT PRIMARY KEY,
+    id_cronograma INT NOT NULL,
+    tipo_etapa VARCHAR(50) NOT NULL,
+    data_etapa DATE NOT NULL,
+    meu_cuidado TEXT NULL,
+    FOREIGN KEY (id_cronograma) REFERENCES cronograma_capilar(id_cronograma) ON DELETE CASCADE ON UPDATE CASCADE
+);
+    
+CREATE TABLE plano (
+    id_plano INT AUTO_INCREMENT PRIMARY KEY,
+    tipo VARCHAR(50) NOT NULL,
+    duracao INT NULL,
+    beneficios TEXT NULL,
+    valor DECIMAL(10, 2) NOT NULL
 );
