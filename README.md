@@ -40,6 +40,17 @@ Por fim, o aplicativo dispõe de um suporte técnico via chat, garantindo o acom
 
 Colocar todas as tabelas do banco no seguinte padrão:
 
+- PLANO:
+
+| Coluna | Tipo | Descrição |
+|---|---|---|
+| ID_Plano (PK) | int | Identificador único do plano |
+| Tipo | enum | Tipo do plano (Premium (Mensal), Vip (Anual) ou Básico (Gratuito)) |
+| Duração | int | Duração do plano (se for premium) |
+| Benefícios | text | Benefícios do plano |
+| Valor | decimal | Valor do plano |
+
+
 - Usuário:
 
 | Coluna | Tipo | Descrição |
@@ -67,6 +78,17 @@ Colocar todas as tabelas do banco no seguinte padrão:
 | Estado_do_Cabelo | varchar | Estado do cabelo (Ressecado, Oleoso, Quimicamente Tratado, etc.) |
 | Objetivo | varchar | Objetivo de cuidado (Hidratação, Nutrição, Reconstrução, etc.) |
 
+- RECOMENDAÇÃO:
+
+| Coluna | Tipo | Descrição |
+|---|---|---|
+| ID_Recomendacao (PK) | int | Identificador único da recomendação |
+| ID_Perfil_Capilar (FK) | int | Identificador do perfil capilar |
+| Título | varchar | Tíitulo da recomendação |
+| Tipo | varchar | Tipo da recomendação |
+| Conteúdo | text | Conteúdo das recomendação |
+| Data_Criaçao| datetime | Data de criação das recomendações |
+| Data_Validade| date | Data de validade das recomendações |
 
 - SALÃO:
 
@@ -89,7 +111,7 @@ Colocar todas as tabelas do banco no seguinte padrão:
 | Nome | varchar | Nome do profissional |
 | Especialidade | varchar | Especialidade do profissional |
 | Telefone | varchar | Telefone do profissional |
-
+| Descricao | text | Descrição do profissional |
 
 - SERVIÇO:
 
@@ -97,7 +119,7 @@ Colocar todas as tabelas do banco no seguinte padrão:
 |---|---|---|
 | ID_Servico (PK) | int | Identificador único do serviço |
 | ID_Salao (FK) | int | Identificador do salão que oferece o serviço |
-| ID_Funcionario (FK) | int | Identificador do profissional que realiza o serviço |
+| ID_Profissional (FK) | int | Identificador do profissional que realiza o serviço |
 | Nome | varchar | Nome do serviço |
 | Descrição | text | Descrição do serviço |
 | Preço | decimal | Preço do serviço |
@@ -115,7 +137,7 @@ Colocar todas as tabelas do banco no seguinte padrão:
 | ID_Servico (FK) | int | Identificador do serviço agendado |
 | Data | date | Data do agendamento |
 | Hora | time | Hora do agendamento |
-| Status | varchar | Status do agendamento (Agendado, Cancelado, Concluído) |
+| Status | enum | Status do agendamento (Agendado, Cancelado, Realizado) |
 
 
 - AVALIAÇÃO:
@@ -127,8 +149,8 @@ Colocar todas as tabelas do banco no seguinte padrão:
 | ID_Salao (FK) | int | Identificador do salão avaliado |
 | Nota | int | Nota da avaliação (1 a 5) |
 | Comentário | text | Comentário da avaliação |
-| Data_Avaliação | date | Data da avaliação |
-
+| Data_Avaliação | datetime | Data da avaliação |
+T
 
 - CRONOGRAMA CAPILAR:
 
@@ -137,20 +159,13 @@ Colocar todas as tabelas do banco no seguinte padrão:
 | ID_Cronograma (PK) | int | Identificador único do cronograma |
 | ID_Usuario (FK) | int | Identificador do usuário que segue o cronograma |
 | ID_Perfil_Capilar (FK) | int | Identificador do perfil capilar relacionado |
-| Data | date | Data do cuidado |
-| Meu_Cuidado | text | Descrição do cuidado realizado |
-| Produto_Sugerido | varchar | Produto sugerido (se for premium) |
-| Recomendações | text | Recomendações dos profissionais |
 
-
-- PLANO:
-
-| Coluna | Tipo | Descrição |
-|---|---|---|
-| ID_Plano (PK) | int | Identificador único do plano |
-| Tipo | varchar | Tipo do plano (Premium anual, mensal ou Básico) |
-| Duração | int | Duração do plano (se for premium) |
-| Benefícios | text | Benefícios do plano |
-| Valor | decimal | Valor do plano |
-
-
+- ETAPA CRONOGRAMA:
+| ID_Etapa_Cronograma (PK) | int |Identificador da etapa |
+| ID_Cronograma  (FK) | int |Identificador do cronograma |
+| ID_Recomedacao (FK) | int |Identificador da recomendação |
+| Tipo_Etapa | varchar | Tipo da etapa |
+| Data_Etapa | date | Data do cuidado |
+| Hora_Etapa | time | Hora do cuidado |
+| Descricao | text | Descrição da etapa de cuidado |
+| Concluido | boolean | Status da etapa |
