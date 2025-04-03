@@ -161,6 +161,9 @@ T
 | ID_Perfil_Capilar (FK) | int | Identificador do perfil capilar relacionado |
 
 - ETAPA CRONOGRAMA:
+
+| Coluna | Tipo | Descrição |
+|---|---|---|
 | ID_Etapa_Cronograma (PK) | int |Identificador da etapa |
 | ID_Cronograma  (FK) | int |Identificador do cronograma |
 | ID_Recomedacao (FK) | int |Identificador da recomendação |
