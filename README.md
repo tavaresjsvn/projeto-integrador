@@ -56,6 +56,7 @@ Colocar todas as tabelas do banco no seguinte padrão:
 | Coluna | Tipo | Descrição |
 |--------|------|-----------|
 | ID_Usuario (PK) | int | Identificador único do usuário |
+| ID_Plano (FK) | varchar | Plano do usuário (gratuito ou premium ) |
 | Nome | varchar | Nome do usuário  |
 | Email | varchar | Email do usuário |
 | CPF | varchar | CPF único do usuário |
@@ -63,7 +64,7 @@ Colocar todas as tabelas do banco no seguinte padrão:
 | Idade | int | Idade do usuário |
 | Endereço | text | Endereço do usuário |
 | Senha | varchar | Senha podendo conter letras e/ou números |
-| Plano | varchar | Plano do usuário (gratuito ou premium ) |
+
 
 
 - PERFIL CAPILAR:
@@ -150,7 +151,6 @@ Colocar todas as tabelas do banco no seguinte padrão:
 | Nota | int | Nota da avaliação (1 a 5) |
 | Comentário | text | Comentário da avaliação |
 | Data_Avaliação | datetime | Data da avaliação |
-T
 
 - CRONOGRAMA CAPILAR:
 
