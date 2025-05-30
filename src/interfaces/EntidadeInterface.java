@@ -1,4 +1,4 @@
-package src.interfaces;
+package grupo_1.src.interfaces;
 
 public interface EntidadeInterface {
     // Interface que implementa o comportamento de uma classe entidade do banco de dados
