@@ -1,5 +1,5 @@
-package src.data_access;
-import src.interfaces.*;
+package grupo_1.src.data_access;
+import grupo_1.src.interfaces.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,9 +10,9 @@ public class DAO {
     // a partir de objetos do programa
 
     Connection con;
-    String database = "meuBanco"; // Modificar essa linha com o nome do seu banco de dados
+    String database = "hairmatch"; // Modificar essa linha com o nome do seu banco de dados
     String user = "root";         // Modificar essa linha com o seu nome de usuário
-    String psswrd = "suaSenha";   // Modificar essa linha com a sua senha de acesso ao banco
+    String psswrd = EnvLoader.get("DB_PASSWORD");  // Modificar essa linha com a sua senha de acesso ao banco
     static DAO instance = null;
 
     public DAO() throws SQLException, ClassNotFoundException {
