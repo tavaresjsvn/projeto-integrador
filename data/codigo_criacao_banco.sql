@@ -95,7 +95,7 @@ CREATE TABLE avaliacao (
     id_avaliacao INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     id_salao INT NOT NULL,
-    nota INT NOT NULL CHECK (nota >= 1 AND nota <= 5),
+    nota DECIMAL(3,2) NOT NULL CHECK (nota >= 0.0 AND nota <= 5),
     comentario TEXT NULL,
     data_avaliacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
